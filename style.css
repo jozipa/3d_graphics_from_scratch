@@ -1,0 +1,21 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: monospace;
+}
+
+#main {
+    display: flex;
+    flex-direction: row;
+}
+
+#sidebar{
+    display: flex;
+    flex-direction: column;
+}
+
+.side-block{
+    margin-top: 2px;
+    
+}

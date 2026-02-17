@@ -1,3 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Document</title>
+</head>
+<body>
+    <div id="main">
+        <div>
+            <canvas id="game"></canvas>
+        </div>
+        <div id="sidebar">
+            <div class="side-block">Foreground color:<input type="color" value="#50FF50" id="foreground"></div>
+            <div class="side-block">Background color:<input type="color" value="#101010" id="background"></div>
+            <div class="side-block">
+                Select figure:
+                <select id='figure'>
+                    <option>cube</option>
+                    <option>pyramid</option>
+                </select>
+            </div>
+        </div>
+    </div>
 
-<canvas id="game"></canvas>
-<script src="index.js"></script>
+
+    <script type="module" src="main.js"></script>
+</body>
+</html>
+
