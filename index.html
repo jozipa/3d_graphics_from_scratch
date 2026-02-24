@@ -7,22 +7,31 @@
     <title>Document</title>
 </head>
 <body>
-    <div id="main">
-        <div>
-            <canvas id="game"></canvas>
+    <div class="flex-col">
+        <div id="nav" class="flex-row">
+            <div class="nav-block">Object Overview</div>
+            <div class="nav-block">Create 3D Object</div>
         </div>
-        <div id="sidebar">
-            <div class="side-block">Foreground color:<input type="color" value="#50FF50" id="foreground"></div>
-            <div class="side-block">Background color:<input type="color" value="#101010" id="background"></div>
-            <div class="side-block">
-                Select figure:
-                <select id='figure'>
-                    <option>cube</option>
-                    <option>pyramid</option>
-                </select>
+        <div id="main" class="flex-row">
+            <div>
+                <canvas id="game"></canvas>
             </div>
-        </div>
+            <div id="controlPanel" class="flex-col">
+                <div class="side-block">Foreground color:<input type="color" value="#50FF50" id="foreground"></div>
+                <div class="side-block">Background color:<input type="color" value="#101010" id="background"></div>
+                <div class="side-block">
+                    Select figure:
+                    <select id='figure'>
+                        <option>cube</option>
+                        <option>pyramid</option>
+                        <option>house</option>
+                    </select>
+                </div>
+            </div>
     </div>
+
+    </div>
+    
 
 
     <script type="module" src="main.js"></script>

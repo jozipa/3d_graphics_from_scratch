@@ -14,8 +14,6 @@ export function point({x,y}){ //draw point
 }
 
 export function line(p1, p2){ //draw line
-    console.log('liniaaaa');
-    
     ctx.strokeStyle = gameConfig.FOREGROUND
     ctx.lineWidth = 3;
     ctx.beginPath();

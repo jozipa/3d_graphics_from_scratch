@@ -5,10 +5,16 @@
     font-family: monospace;
 }
 
-#main {
+.flex-row{
     display: flex;
     flex-direction: row;
 }
+
+.flex-col{
+    display: flex;
+    flex-direction: column;
+}
+
 
 #sidebar{
     display: flex;
@@ -18,4 +24,19 @@
 .side-block{
     margin-top: 2px;
     
+}
+
+#nav{
+    height: auto;
+    width:100%;
+    margin: 5px;
+    border: 2px solid grey;
+    border-radius: 10px;
+}
+
+.nav-block{
+    width: 100px;
+    height: 60px;
+    margin: 5px;
+    text-align: center;
 }

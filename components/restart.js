@@ -6,6 +6,8 @@ const startingValues = {
     BACKGROUND: "#101010",
     FOREGROUND: "#50FF50",
     dz: 1,
+    dx: 0,
+    dy: 0,
     angleX: 0,
     angleY: 0
 }
