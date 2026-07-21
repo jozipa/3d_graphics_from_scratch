@@ -7,7 +7,6 @@ let gameConfig = {
     BACKGROUND: "#101010",
     FOREGROUND: "rgba(80, 255, 80, 1)",
     objectsToRender: [new GameObject(objectsData.cube)],
-    floor: [],
     freeCam: true,
 }
 
@@ -15,6 +14,8 @@ const game = document.getElementById('game')
 
 game.width = gameConfig.width;
 game.height = gameConfig.height;
+
+
 
 const forPicker = document.getElementById('foreground')
 const backPicker = document.getElementById('background')
@@ -39,7 +40,7 @@ function gen_flat_cubic_map(){
     let start_x = -(24*size+size/2)
     let start_z = start_x
     for (let i = 0; i<2500;i++){
-        gameConfig.floor.push(new GameObject(objectsData.cube,'#33ce45ff',start_x+((i%50)*r_size),0,start_z+(Math.floor(i/50)*r_size),0,0,0,scale,0.1,scale))
+        gameConfig.objectsToRender.push(new GameObject(objectsData.cube,'#33ce45ff',start_x+((i%50)*r_size),0,start_z+(Math.floor(i/50)*r_size),0,0,0,scale,0.1,scale))
     }
 }
 

@@ -22,6 +22,18 @@ export class GameObject{
         return this.matrix;
     }
 
+    get_vertex_arr(){
+        let vertex_arr = [];
+        for (let i = 0; i<this.data.fs.length; i++){
+            for (let j = 0; j<3; j++){
+                vertex_arr.push(this.data.vs[this.data.fs[i][j]].x)
+                vertex_arr.push(this.data.vs[this.data.fs[i][j]].y)
+                vertex_arr.push(this.data.vs[this.data.fs[i][j]].z)
+            }
+        }
+        return vertex_arr;
+    }
+
     move(dx = 0, dy = 0, dz = 0) {
         this.position.x += dx;
         this.position.y += dy;

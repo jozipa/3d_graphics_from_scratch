@@ -1,6 +1,6 @@
 import {gameConfig} from './game.js'
 
-const ctx = game.getContext("2d")
+//const ctx = game.getContext("2d")
 
 export function clear() { //clear canvas
     ctx.fillStyle = gameConfig.BACKGROUND
