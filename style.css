@@ -13,8 +13,8 @@
 .flex-col{
     display: flex;
     flex-direction: column;
+    margin: 10px;
 }
-
 
 #sidebar{
     display: flex;
@@ -23,12 +23,11 @@
 
 .side-block{
     margin-top: 2px;
-    
 }
 
 #nav{
     height: auto;
-    width:100%;
+    width:95%;
     margin: 5px;
     border: 2px solid grey;
     border-radius: 10px;
@@ -39,4 +38,7 @@
     height: 60px;
     margin: 5px;
     text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }

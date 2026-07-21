@@ -1,5 +1,5 @@
-import { game ,projectionConfig ,setAngleX, setAngleY, setDx, setDy, setDz } from "../components/game.js"
-
+import { game } from "../components/game.js"
+import { camera } from "../components/camera.js"
 
 const mouse = {
     x: 0,
@@ -34,25 +34,21 @@ window.addEventListener('mousemove', (e) => {
     mouse.y = e.clientY;
 });
 
-function mouseObjRotation(dt){
-    setAngleX(projectionConfig.angleX+((mouse.x-prevX)*dt))
-    setAngleY(projectionConfig.angleY - ((mouse.y-prevY)*dt))
-    
+function mouseObjRotation(dt, obj){
+    obj.rotate(((mouse.y-prevY)*dt),(mouse.x-prevX)*dt,0)
     prevX=mouse.x
     prevY=mouse.y
 }
 
-//zooming
 game.addEventListener('wheel', (e)=>{
     e.preventDefault();
-    if (!mouse.isDownL && !mouse.isDownR){setDz(projectionConfig.dz +e.deltaY*0.01)}
+    if (!mouse.isDownL && !mouse.isDownR){setDz(camera.dz +e.deltaY*0.01)}
 }, { passive: false })
 
 
 //moving x or y
-function mouseObjMove(dt){
-    setDx(projectionConfig.dx - (mouse.x-prevX)*dt)
-    setDy(projectionConfig.dy - (mouse.y-prevY)*dt)
+function mouseObjMove(dt, obj){
+    obj.move((mouse.x-prevX)*dt,-(mouse.y-prevY)*dt,0)
     prevX=mouse.x
     prevY=mouse.y
 }

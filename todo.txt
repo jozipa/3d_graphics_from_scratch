@@ -1,0 +1,27 @@
+
+-------------| Mechanika i struktura |--------------------
+1. Rozwazyc dodanie klasy na polygony
+2. Przemysklec czy super arr ma sens jak rozwiazac to
+    a. jak zajac sie chwilowo uzytkowanym elementem czy osobna tablica czy wszystko w jednym supArr
+    b. czy osobne na podłogę czy nie
+3. Przedmioty defaultowo respia sie na powierzchni a nie pod mapa
+4. Poprawić algorytm malarza (lepiej znajdować kolejość bo średnia chyba nie zawze działa)
+5. Dodać wyliczanie czy czesc trojkata jest widoczna jak tak to obliczac nowe brzegi (chyba polaczone troche z 3)
+6. Kolory poszczeegolbych scian a nie przedmiotu jako calosci
+*7. Dodać obsługę wybierania przedmitu do konturowania i wtedy przejmowanie nad nim storow 
+*8. Dodawanie kilku elementow na mape (po czesci zwiazane z wczesniejszym)
+
+______________| Aplikacja |---------------------------
+1. Dodać importowanie i eksportowanie plikow
+2. ?Dodać do tego serwer? aby mieć zapisane swoje "projekty"
+3. Dodać osobną stronę do przeglądania poszczegolnych elementow
+4. osobna strona na całe mapy
+*5. Sprobować dodać chodzenia tryb swobodnego latanie i chodzenia
+6. Dodać panel zmiany ustawień kamery typu fov i odlegloc widzenia
+
+
+---------------| Nudniejsze |---------------------
+1. Poprawic sterowanie
+2. Zrobic jakis wyglad xd
+3. Powiekszanie okna gry
+4. Modal z instrukcja obslugi 
