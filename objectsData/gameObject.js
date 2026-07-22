@@ -1,4 +1,5 @@
 import { module_matrix } from "../math/m_4.js"
+import {hex_toDecimal} from "../components/utils.js"
 
 export class GameObject{
     constructor(type,color="#3b3b3fff",x=0,y=0,z=0,rx=0,ry=0,rz=0,sx=1,sy=1,sz=1,contour=false){
@@ -30,9 +31,16 @@ export class GameObject{
                 vertex_arr.push(this.data.vs[this.data.fs[i][j]].y)
                 vertex_arr.push(this.data.vs[this.data.fs[i][j]].z)
             }
+            //na pozniej jak co
+            //vertex_arr.push(...this.color.split('#')[1].match(/.{2}/g).map((c) => hex_toDecimal(c) / 255.0))
         }
         return vertex_arr;
     }
+
+    get_color_arr(){
+        return new Float32Array(this.color.split('#')[1].match(/.{2}/g).map((c) => hex_toDecimal(c)/255.0))
+    }
+
 
     move(dx = 0, dy = 0, dz = 0) {
         this.position.x += dx;

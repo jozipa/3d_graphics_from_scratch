@@ -34,12 +34,10 @@ function frame(){
         let mvp = mvp_m4(m,v,p)
 
         let vertex_arr = obj.get_vertex_arr()
+        let color_arr = obj.get_color_arr()
 
-        render_OpenGl2(vertex_arr,3,"gl.FLOAT",false,0,0, transposeMatrix4(mvp))
+        render_OpenGl2(vertex_arr,3,"gl.FLOAT",false,0,0, transposeMatrix4(mvp), color_arr)
     })
-
-    //let render_arr = sort_triangles_by_dist(gameConfig.objectsToRender,v,p)
-    //render_from_arr(render_arr)
 
     setTimeout(frame, 1000/FPS)
 }

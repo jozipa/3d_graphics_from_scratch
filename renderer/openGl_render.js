@@ -13,6 +13,7 @@ in vec4 a_position;
 uniform mat4 u_mvp;
 
 void main(){
+
     gl_Position = u_mvp * a_position;
 }`;
 
@@ -20,8 +21,10 @@ let fragmentShaderSource = `#version 300 es
 precision highp float;
 out vec4 outColor;
 
+uniform vec4 u_color;
+
 void main(){
-    outColor = vec4(1, 0, 0.5, 1); // Różowy/Fioletowy
+    outColor = u_color;
 }`;
 
 function createShader(gl, type, source){
@@ -52,17 +55,25 @@ let fragmentShader = createShader(gl, gl.FRAGMENT_SHADER, fragmentShaderSource);
 let program = createProgram(gl, vertexShader, fragmentShader);
 
 let positionAttributeLocation = gl.getAttribLocation(program, "a_position");
+let colorAttributeLocation = gl.getUniformLocation(program, "u_color");
 let mvpLocation = gl.getUniformLocation(program, "u_mvp");
 
 let positionBuffer = gl.createBuffer();
 let vao = gl.createVertexArray();
 
-export function render_OpenGl2(positions, size, type, normalize, stride, offset, mvp){
+
+
+gl.enable(gl.DEPTH_TEST);
+
+export function render_OpenGl2(positions, size, type, normalize, stride, offset, mvp, color_arr){
     //buffer
-    
+    console.log(color_arr, 'color_arr')
+
     gl.bindBuffer(gl.ARRAY_BUFFER, positionBuffer);
 
     gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(positions), gl.STATIC_DRAW);
+
+    gl.viewport(0, 0, gameConfig.width, gameConfig.height);
 
     //vao
     
@@ -74,13 +85,13 @@ export function render_OpenGl2(positions, size, type, normalize, stride, offset,
         positionAttributeLocation, size, gl.FLOAT, normalize, stride, offset
     );
 
-    // 5. DOPASOWANIE ROZMIARU (Zastąpione webglUtils)
-    gl.viewport(0, 0, gameConfig.width, gameConfig.height);
+    
 
     gl.useProgram(program);
     gl.bindVertexArray(vao);
 
     gl.uniformMatrix4fv(mvpLocation, false, mvp);
+    gl.uniform4fv(colorAttributeLocation, color_arr);
 
     let primitiveType = gl.TRIANGLES;
     offset = 0;
@@ -89,7 +100,6 @@ export function render_OpenGl2(positions, size, type, normalize, stride, offset,
 }
 
 export function clear_OpenGl2(){
-    // 6. CZYSZCZENIE I RYSOWANIE
     gl.clearColor(0, 0, 0, 1); // Zmieniłem na czarne tło (ostatnia jedynka to Alpha), żeby fioletowy trójkąt był dobrze widoczny
-    gl.clear(gl.COLOR_BUFFER_BIT);
+    gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
 }
