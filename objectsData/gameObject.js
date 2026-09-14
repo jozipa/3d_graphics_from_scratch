@@ -3,7 +3,8 @@ import {hex_toDecimal} from "../components/utils.js"
 
 export class GameObject{
     constructor(type,color="#3b3b3fff",x=0,y=0,z=0,rx=0,ry=0,rz=0,sx=1,sy=1,sz=1,contour=false){
-        this.data = type.data;
+        
+        this.mesh = type.mesh;
         this.pivotType = type.pivotType;
         this.position = {x,y,z};
         this.rotation = {x: rx,y: ry,z: rz};
@@ -24,17 +25,7 @@ export class GameObject{
     }
 
     get_vertex_arr(){
-        let vertex_arr = [];
-        for (let i = 0; i<this.data.fs.length; i++){
-            for (let j = 0; j<3; j++){
-                vertex_arr.push(this.data.vs[this.data.fs[i][j]].x)
-                vertex_arr.push(this.data.vs[this.data.fs[i][j]].y)
-                vertex_arr.push(this.data.vs[this.data.fs[i][j]].z)
-            }
-            //na pozniej jak co
-            //vertex_arr.push(...this.color.split('#')[1].match(/.{2}/g).map((c) => hex_toDecimal(c) / 255.0))
-        }
-        return vertex_arr;
+        return this.data;
     }
 
     get_color_arr(){

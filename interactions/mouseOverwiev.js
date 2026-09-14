@@ -1,56 +1,72 @@
-import { game } from "../components/game.js"
-import { camera } from "../components/camera.js"
 
-const mouse = {
-    x: 0,
-    y: 0,
-    isDownL: false,
-    isDownR: false
+
+class Mouse{
+    constructor(game, camera){
+        this.x = 0
+        this.y = 0
+        this.isDownL = false
+        this.isDownR = false
+        this.prevX = 0
+        this.prevY=0
+
+        game.addEventListener("contextmenu", (e) => {
+            this.contextMenu(e)
+        });
+
+        game.addEventListener('mousedown', (e) => {
+            this.mouseDown(e)
+        })
+
+        window.addEventListener('mouseup', () => {
+            this.mouseUp()
+        })
+
+        window.addEventListener('mousemove', (e) => {
+            this.mouseMove(e)
+        });
+
+        game.addEventListener('wheel', (e)=>{
+            this.wheel(e, camera)
+        }, { passive: false })
+
+
+    }
+    contextMenu(e){
+        e.preventDefault();
+    }
+    mouseDown(e){
+        if (e.button==0){this.isDownL=true}
+        else {this.isDownR=true}
+        this.prevX=e.clientX
+        this.prevY=e.clientY
+    }
+    mouseUp(){
+        this.isDownL = false
+        this.isDownR = false
+        console.log('uppin');
+        
+    }
+    mouseMove(e){
+        this.x = e.clientX;
+        this.y = e.clientY;
+    }
+    wheel(e, camera){
+        e.preventDefault();
+        if (!this.isDownL && !this.isDownR){
+            camera.z +=e.deltaY*0.01
+        }
+    }
+    mouseObjRotation(dt, gameObject_fucusElement){
+        gameObject_fucusElement.rotate(((this.y-this.prevY)*dt),(this.x-this.prevX)*dt,0)
+        this.prevX=this.x
+        this.prevY=this.y
+    }
+    mouseObjMove(dt, gameObject_focusElement){
+        gameObject_focusElement.move((this.x-this.prevX)*dt,-(this.y-this.prevY)*dt,0)
+        this.prevX=this.x
+        this.prevY=this.y
+    }
 }
 
-let prevX = 0
-let prevY = 0
 
-game.addEventListener("contextmenu", (e) => {
-  e.preventDefault();
-});
-
-//rotateing
-game.addEventListener('mousedown', (e) => {
-    e.preventDefault();
-    if (e.button==0){mouse.isDownL=true}
-    else {mouse.isDownR=true}
-    prevX=e.clientX
-    prevY=e.clientY
-})
-
-window.addEventListener('mouseup', () => {
-    mouse.isDownL = false
-    mouse.isDownR = false
-})
-
-window.addEventListener('mousemove', (e) => {
-    mouse.x = e.clientX;
-    mouse.y = e.clientY;
-});
-
-function mouseObjRotation(dt, obj){
-    obj.rotate(((mouse.y-prevY)*dt),(mouse.x-prevX)*dt,0)
-    prevX=mouse.x
-    prevY=mouse.y
-}
-
-game.addEventListener('wheel', (e)=>{
-    e.preventDefault();
-    if (!mouse.isDownL && !mouse.isDownR){setDz(camera.dz +e.deltaY*0.01)}
-}, { passive: false })
-
-
-//moving x or y
-function mouseObjMove(dt, obj){
-    obj.move((mouse.x-prevX)*dt,-(mouse.y-prevY)*dt,0)
-    prevX=mouse.x
-    prevY=mouse.y
-}
-
-export {mouse, mouseObjRotation, mouseObjMove}
+export {Mouse}
