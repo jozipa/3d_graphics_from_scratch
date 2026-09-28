@@ -1,13 +1,18 @@
-
+import { hasMethods } from "../components/utils.js"
 
 class Mouse{
     constructor(game, camera){
         this.x = 0
         this.y = 0
+        this.lastX = 0
+        this.lastY = 0
+        
         this.isDownL = false
         this.isDownR = false
-        this.prevX = 0
-        this.prevY=0
+        this.dx = 0
+        this.dy= 0
+        this.targetElement = camera
+        this.invertAxis = -1
 
         game.addEventListener("contextmenu", (e) => {
             this.contextMenu(e)
@@ -29,22 +34,56 @@ class Mouse{
             this.wheel(e, camera)
         }, { passive: false })
 
-
     }
+    //setters
+    setInvertAxis(value){
+        this.invertAxis = value
+    }
+    setTargetElement(element, changeAxis=false){
+        
+        if (hasMethods(element, "rotate", "move")) {
+            console.warn("Element cannot be set as mouse target object:", element);
+            return;
+        }
+        if (changeAxis){
+            this.changeInvertAxis()
+        }
+        this.targetElement = element
+    }
+
+    //updaters
+    changeInvertAxis(){
+        this.setInvertAxis(this.invertAxis*(-1))
+    }
+    mouseObjRotation(dt){
+        this.targetElement.rotate(this.dy*dt*this.invertAxis,this.dx*dt*this.invertAxis,0)
+    }
+    mouseObjMove(dt){
+        this.targetElement.move(this.dx*dt,-this.dy*dt,0)
+    }
+    update(dt){
+        this.dx = this.x-this.lastX
+        this.dy = this.y-this.lastY
+
+        this.lastX = this.x
+        this.lastY = this.y
+
+        if (this.isDownL){this.mouseObjRotation(dt)}
+        if (this.isDownR){this.mouseObjMove(dt)}
+    }
+
+
+    //action functions
     contextMenu(e){
         e.preventDefault();
     }
     mouseDown(e){
         if (e.button==0){this.isDownL=true}
         else {this.isDownR=true}
-        this.prevX=e.clientX
-        this.prevY=e.clientY
     }
     mouseUp(){
         this.isDownL = false
         this.isDownR = false
-        console.log('uppin');
-        
     }
     mouseMove(e){
         this.x = e.clientX;
@@ -56,17 +95,6 @@ class Mouse{
             camera.z +=e.deltaY*0.01
         }
     }
-    mouseObjRotation(dt, gameObject_fucusElement){
-        gameObject_fucusElement.rotate(((this.y-this.prevY)*dt),(this.x-this.prevX)*dt,0)
-        this.prevX=this.x
-        this.prevY=this.y
-    }
-    mouseObjMove(dt, gameObject_focusElement){
-        gameObject_focusElement.move((this.x-this.prevX)*dt,-(this.y-this.prevY)*dt,0)
-        this.prevX=this.x
-        this.prevY=this.y
-    }
 }
-
 
 export {Mouse}

@@ -1,3 +1,4 @@
+import { mvp_m4 } from "../math/mvp_render.js";
 
 let vertexShaderSource = `#version 300 es
     in vec4 a_position;
@@ -43,12 +44,7 @@ function createProgram(gl, vertexShader, fragmentShader){
 
 export class Renderer{
     constructor(gameConfig){
-        console.log(gameConfig.game);
 
-        gameConfig.game.addEventListener("webglcontextcreationerror", (event) => {
-            console.error("Powód błędu WebGL:", event.statusMessage);
-        }, false);
-        
         this.gl = gameConfig.game.getContext("webgl2")
 
         if (!this.gl){ 
@@ -69,14 +65,23 @@ export class Renderer{
 
         console.log("succesfull webgl inittialization")
     }
-    render(gameObject_to_render, mvp, color_vec){
+    render_object(model, mvp, color_vec){
         this.gl.useProgram(this.program)
 
         this.gl.uniformMatrix4fv(this.mvpLocation, false, mvp)
         this.gl.uniform4fv(this.colorAttributeLocation, color_vec)
-
-        gameObject_to_render.mesh.draw()
         
+        model.mesh.draw() 
+    }
+    render_scene(scene, projection_matrix, viev_matrix){
+        
+        scene.forEach(gameObject => {
+            let module_matrix = gameObject.get_matrix()
+            
+            let mvp = mvp_m4(module_matrix,viev_matrix,projection_matrix)
+            
+            this.render_object(gameObject.model, mvp, gameObject.color)
+        });
     }
     clear(){
         this.gl.clearColor(0, 0, 0, 1); 

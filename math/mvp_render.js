@@ -1,5 +1,4 @@
 import { matrix_multiplication4x4, vector_matrix4x4multiplication } from "./m_utils.js";
-import { camera1 } from "../main.js";
 
 export function mvp_m4(m, v,p){
     return matrix_multiplication4x4(p,matrix_multiplication4x4(v,m));

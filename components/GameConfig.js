@@ -1,5 +1,3 @@
-import { GameObject } from "../objectsData/gameObject.js";
-
 const defaultGameConfig = {
     width: 860,
     height: 480,
@@ -8,18 +6,14 @@ const defaultGameConfig = {
 }
 
 class GameConfig{
-    constructor({width, height, BACKGROUND, FOREGROUND}){
-        this.width = width
-        this.height = height
-        this.BACKGROUND = BACKGROUND
-        this.FOREGROUND = FOREGROUND
-        this.objectsToRender = [null]
-        this.freeCam = true
-        this.game = document.getElementById("game")
-
-        this.game.width = this.width
-        this.game.height = this.height
-
+    constructor(config){
+        this.canvas = document.getElementById(config.canvasId)
+        this.canvas.width = config.width
+        this.canvas.height = config.height
+        this.width = config.width
+        this.height = config.height
+        this.BACKGROUND = '#101010'
+        this.FOREGROUND = '#50FF50'
 
         this.forPicker = document.getElementById("foreground")
         this.backPicker = document.getElementById('background')
@@ -32,32 +26,23 @@ class GameConfig{
             this.BACKGROUND = e.target.value; 
         });
     }
-
-    changeMode(){
-        this.freeCam != this.freeCam
-    }
-
-    gen_flat_cubic_map(objectsData){
-        let size = 0.5;
-        let scale = 1;
-        let r_size = size*scale;
-        
-        let start_x = -(24*size+size/2)
-        let start_z = start_x
-
-        
-        for (let i = 0; i<2500;i++){
-            this.objectsToRender.push(new GameObject(objectsData.models.cube,'#33ce45ff',start_x+((i%50)*r_size),0,start_z+(Math.floor(i/50)*r_size),0,0,0,scale,0.1,scale))
+    setCanvas(canvasId){
+        let htmlCanvas = document.getElementById(canvasId)
+        if (htmlCanvas==null){
+            console.log(`cannot set new canvas with id ${canvasId}, got null`);
+            return
         }
+        this.canvas = htmlCanvas
+    }
+    setWidth(width){
+        this.width = width
+        this.canvas.width = width
+    }
+    setHeight(height){
+        this.height = height
+        this.canvas.height = height
     }
 
-    changeObject(objectsData, val){
-        console.log(objectsData);
-        
-        console.log(objectsData.models[val].mesh, val);
-        
-        this.objectsToRender[0] = new GameObject(objectsData.models[val])
-    }
 }
 
 export {GameConfig, defaultGameConfig}
