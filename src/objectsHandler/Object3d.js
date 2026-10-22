@@ -1,8 +1,8 @@
 import { calc_module_matrix } from "../math/m_4.js"
-import {hex_toDecimal} from "../components/utils.js"
+import {hex_toDecimal} from "../utils.js"
 
 export class Object3d{
-    constructor(model,color="#3b3b3fff",x=0,y=0,z=0,rx=0,ry=0,rz=0,sx=1,sy=1,sz=1,contour=false){
+    constructor(model,color="#15ff00",x=0,y=0,z=0,rx=0,ry=0,rz=0,sx=1,sy=1,sz=1,contour=false){
         this.model = model;
         this.position = {x,y,z};
         this.rotation = {x: rx,y: ry,z: rz};

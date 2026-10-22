@@ -40,7 +40,7 @@ export class Model{
                 this.pivotVec = [(bounds.max[0]+bounds.min[0])/2,bounds.max[1],(bounds.max[2]+bounds.min[2])/2]
                 break
             default:  // 'origin'
-                this.pivotType = [0,0,0]
+                this.pivotVec = [0,0,0]
                 break;
         }
     }

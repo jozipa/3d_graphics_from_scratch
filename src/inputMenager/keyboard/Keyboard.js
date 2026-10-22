@@ -1,5 +1,5 @@
 import { rotationY_matrix } from "../../math/m_3.js";
-import { KeyboardActionsManager } from "./KeyboardActionsManager.js";
+import { KeyboardActionsManager } from "./actions/KeyboardActionsManager.js";
 
 export default class Keyboard{
     constructor(camera){

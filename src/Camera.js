@@ -1,4 +1,4 @@
-import { calc_view_matrix, calc_projection_matrix } from "../math/m_4.js";
+import { calc_view_matrix, calc_projection_matrix } from "./math/m_4.js";
 
 const defaultCamera = {
     x: 0,

@@ -1,5 +1,5 @@
-import {Mouse} from "../interactions/mouseOverwiev.js"
-import Keyboard from "../interactions/keyboardHandle/Keyboard.js"
+import {Mouse} from "./mouse/Mouse.js"
+import Keyboard from "./keyboard/Keyboard.js"
 
 export class InputManager{
     constructor(canvas, camera){

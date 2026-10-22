@@ -1,4 +1,4 @@
-import { hasMethods } from "../components/utils.js"
+import { hasMethods } from "../../utils.js"
 
 class Mouse{
     constructor(game, camera){
@@ -56,7 +56,10 @@ class Mouse{
         this.setInvertAxis(this.invertAxis*(-1))
     }
     mouseObjRotation(dt){
+        console.log('rotation', this.targetElement);
+        
         this.targetElement.rotate(this.dy*dt*this.invertAxis,this.dx*dt*this.invertAxis,0)
+    
     }
     mouseObjMove(dt){
         this.targetElement.move(this.dx*dt,-this.dy*dt,0)

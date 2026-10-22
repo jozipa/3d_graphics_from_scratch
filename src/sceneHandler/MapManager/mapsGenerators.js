@@ -1,4 +1,4 @@
-import { Object3d } from "../../objectsData/Object3d.js";
+import { Object3d } from "../../objectsHandler/Object3d.js";
 
 export function gen_flat_cubic_map(assets){
         let size = 0.5;

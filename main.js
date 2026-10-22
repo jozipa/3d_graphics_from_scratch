@@ -1,5 +1,4 @@
-import { Engine } from "./components/Engine.js";
-import { Object3d } from "./objectsData/Object3d.js";
+import { Engine } from "./src/Engine.js";
 
 let engine = new Engine({
     canvasId: "game",
@@ -7,17 +6,21 @@ let engine = new Engine({
     height: 480
 })
 
-
-
 engine.init()
-let focused_object = engine.input.mouse.targetElement
-focused_object.model.setPivotType('bottom')
 
-engine.scene.delete_object(focused_object)
-let piramidka = new Object3d(engine.assets.models.pyramid)
-engine.input.mouse.setTargetElement(piramidka)
-engine.scene.add_object(piramidka)
-piramidka.model.setPivotType('up')
+/*
+let newElement = await engine.assets.load_newOBJ_object('tree','tree','./models/ObjFiles/model.obj', 'bottom')
+engine.scene.add_object(newElement)
+engine.input.mouse.targetElement = newElement
+*/
+
+
+
+
+
+
+
+
 
 
 

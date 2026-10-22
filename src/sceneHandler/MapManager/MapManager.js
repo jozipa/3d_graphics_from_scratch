@@ -10,7 +10,7 @@ export class MapManager {
             flat: gen_flat_cubic_map(assets)
         }
 
-        this.currentMap = this.maps.flat
+        this.currentMap = this.maps.empty
         this.mapChanged = false
     }
     changeMap(mapName){

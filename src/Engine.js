@@ -1,11 +1,11 @@
-import { Renderer } from "../renderer/Renderer.js"
-import {Camera, defaultCamera} from "../components/Camera.js"
-import { InputManager } from "./InputManager.js"
-import Scene from "./Scene.js"
-import Assets from "../objectsData/Assets.js"
-import {Object3d} from "../objectsData/Object3d.js"
+import {Renderer} from "./renderer/Renderer.js"
+import {Camera, defaultCamera} from "./Camera.js"
+import { InputManager } from "./inputMenager/InputManager.js"
+import Scene from "./sceneHandler/Scene.js"
+import Assets from "./objectsHandler/Assets.js"
+import {Object3d} from "./objectsHandler/Object3d.js"
 import { GameConfig } from "./GameConfig.js"
-import { MapManager } from "./MapManager/MapManager.js"
+import { MapManager } from "./sceneHandler/MapManager/MapManager.js"
 
 
 export class Engine{
@@ -23,21 +23,23 @@ export class Engine{
 
         this.isRunning = false
     }
-    init(){
+    init(loadDefaultObject=true){
         this.isRunning = true
         
-        this.set_new_render_scene()
+        this.set_new_render_scene(loadDefaultObject)
         
         this.loop()
     }
-    set_new_render_scene(){
+    set_new_render_scene(loadDefaultObject){
         this.scene.clear()
         this.scene.set_scene(this.mapManager.getMap())
 
-        let focused_element = new Object3d(this.assets.models.cube,'#535353ff',0,0,0,0,0,0,1,1,1)
-        this.scene.add_object(focused_element)
-        this.input.mouse.setTargetElement(focused_element, true)
-
+        if (loadDefaultObject){
+            let focused_element = new Object3d(this.assets.models.cube,'#535353ff',0,0,0,0,0,0,1,1,1)
+            this.scene.add_object(focused_element)
+            this.input.mouse.setTargetElement(focused_element, true)
+        }
+        
         this.mapManager.mapChanged = false
     }
     update(dt){
@@ -48,6 +50,11 @@ export class Engine{
         if (!this.isRunning) return;
 
         let dt = 1/60
+
+        if (this.mapManager.mapChanged){
+            this.scene.set_scene(this.mapManager.getMap())
+            this.scene.add_object(this.input.mouse.targetElement)
+        }
 
         this.update(dt)
         this.render()
